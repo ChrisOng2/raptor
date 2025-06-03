@@ -7,6 +7,7 @@ add_subdirectory(multilevel)
 add_subdirectory(krylov)
 add_subdirectory(profiling)
 add_subdirectory(external)
+add_subdirectory(timing_models)
 
 if (WITH_MPI)
     set(par_SOURCES
@@ -26,7 +27,8 @@ add_library(raptor ${core_SOURCES} ${core_HEADERS}
         ${multilevel_SOURCES} ${multilevel_HEADERS} 
         ${krylov_SOURCES} ${krylov_HEADERS} 
         ${profile_SOURCES} ${profile_HEADERS}
-        ${external_SOURCES} ${external_HEADERS})
+        ${external_SOURCES} ${external_HEADERS}
+        ${timing_models_HEADERS})
 
 target_link_libraries(raptor PUBLIC ${MPI_C_LIBRARIES} ${MFEM_LIBRARIES} ${METIS_LIBRARIES} ${HYPRE_LIBRARIES}
     ${MUELU_LIBRARIES} ${PETSC_LIBRARIES} ${PTSCOTCH_LIBRARIES} ${PARMETIS_LIBRARIES} ${EXTERNAL_LIBS})
@@ -53,6 +55,7 @@ install(FILES ${multilevel_HEADERS} DESTINATION "include/raptor/multilevel")
 install(FILES ${krylov_HEADERS} DESTINATION "include/raptor/krylov")
 install(FILES ${profile_HEADERS} DESTINATION "include/raptor/profiling")
 install(FILES ${external_HEADERS} DESTINATION "include/raptor/external")
+install(FILES ${timing_models_HEADERS} DESTINATION "include/raptor/timing_models")
 install(EXPORT raptorTargets
   FILE raptorTargets.cmake
   NAMESPACE "raptor::"
